@@ -3,7 +3,7 @@
 import { callFetchAllArticles, callFetchArticle } from "@/ajax/ArticleAjax";
 import { formatDate } from "@/modules/DateHandler";
 
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 import { Article, INITIAL_ARTICLE } from "@/types/Article";
 
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -27,7 +27,7 @@ export default function Page(props: Props) {
     <PageShell>
       <Container>
         <ArticleStyles />
-        <div key={props.article.slug}>
+        <div key={props.article.slug} className="article">
           <MotionSlide left>
             <AdminConsoleOfPost isAdmin={isAdmin} slug={props.article.slug} />
 

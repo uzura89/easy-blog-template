@@ -6,53 +6,59 @@ export default function ArticleStyles() {
 
   return (
     <style>{`
-  img {
+  .article  img {
     width: 580px;
     margin: auto;
     margin-bottom: 1.5rem;
     margin-top: 1.5rem;
     border-radius: 0.3rem;
     max-width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  h1 {
+  .article h1 {
     font-size: 1.6rem;
     margin-top: 1.2em;
     margin-bottom: 0.8em;
     ${HeaderBase}
   }
 
-  h2 {
+  .article h2 {
     font-size: 1.2rem;
     margin-top: 1.2em;
     margin-bottom: 0.8em;
     ${HeaderBase}
   }
 
-  p {
+  .article p {
     font-size: 17px;
     color: rgb(var(--foreground-rgb-light));
     line-height: 1.75;
   }
 
+  .article a {
+    color: rgb(var(--link-rgb));
+    text-decoration: underline;
+  }
+
   @media (max-width:640px) {
-    img {
+    .article img {
       margin-bottom: 1.5rem;
     }
 
-    h1 {
+    .article h1 {
       font-size: 1.4rem;
       margin-bottom: 0.8em;
       margin-top: 1em;
     }
 
-    h2 {
+    .article h2 {
       font-size: 1.1rem;
       margin-top: 1em;
       margin-bottom: 0.8em;
     }
     
-    p {
+    .article p {
       font-size: 14px;
     }
   }
