@@ -50,6 +50,7 @@ You can start writing by running the app in the development mode.
 Just run the following command in the terminal.
 
 ```bash
+$ npm install
 $ npm run dev
 ```
 
