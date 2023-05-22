@@ -9,7 +9,16 @@ export default function About() {
     <PageShell>
       <Container>
         <MotionSlide right>
-          <div>about page</div>
+          <p>
+            This blog is built with{" "}
+            <a
+              href="https://github.com/uzura89/theblog"
+              className="text-link hover:underline"
+            >
+              THE BLOG
+            </a>
+            .
+          </p>
         </MotionSlide>
       </Container>
     </PageShell>
