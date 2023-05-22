@@ -1,0 +1,53 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --foreground-rgb: 58, 58, 53;
+  --foreground-rgb-light: 57, 57, 51;
+  --foreground-rgb-lighter: 116, 116, 107;
+  --background-rgb: 250, 250, 248;
+  --border-rgb: 215, 215, 210;
+  --link-rgb: 0, 123, 131;
+  --link-light-rgb: 218, 239, 240;
+  --button-bg-disabled-rgb: 220, 220, 220;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+body {
+  -webkit-font-smoothing: antialiased;
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-rgb));
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    /* background: #f1f1f1; */
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #999;
+  }
+}
