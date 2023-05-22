@@ -1,4 +1,4 @@
-# What is THE BLOG?
+# What is Easy Blog Template?
 
 It is a personal blog template anyone can use to make their own blog page.
 The process is really simple:
