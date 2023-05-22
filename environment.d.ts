@@ -2,8 +2,6 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NODE_ENV_NEXT: "development" | "production";
-      LOGIN_PASSWORD: string;
-      JWT_SECRET: string;
     }
   }
 }

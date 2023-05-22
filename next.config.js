@@ -1,8 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  serverRuntimeConfig: {
-    PROJECT_ROOT: __dirname,
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;
