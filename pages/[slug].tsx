@@ -27,17 +27,20 @@ export default function Page(props: Props) {
     <PageShell>
       <Container>
         <ArticleStyles />
-        <div key={props.article.slug} className="article">
+        <div key={props.article.slug}>
           <MotionSlide left>
             <AdminConsoleOfPost isAdmin={isAdmin} slug={props.article.slug} />
 
             <div className="text-sm font-bold text-third mb-3 sm:mb-5">
               {formatDate(props.article.date)}
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold mb-7 sm:mb-12 leading-8 sm:leading-10">
+            <h1 className="text-2xl sm:text-4xl font-bold mb-7 sm:mb-10 leading-8 sm:leading-10">
               {props.article.title}
             </h1>
-            <div dangerouslySetInnerHTML={{ __html: props.article.body }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: props.article.body }}
+              className="article"
+            />
           </MotionSlide>
         </div>
       </Container>
