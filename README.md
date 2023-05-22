@@ -10,12 +10,15 @@ The process is really simple:
 ## Benefit
 
 **1. No Database Needed**
+
 The article data you write will be saved in the public directory as a json file, so you don't need to prepare other database servers.
 
 **2. Rich Text Form**
+
 You can write in rich text form, so you don't need to learn markdown format.
 
 **3. Image Support**
+
 Adding images is as easy as selecting the image file in your PC.
 
 ## Technologies Used
