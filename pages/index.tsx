@@ -57,15 +57,15 @@ export default function Home(props: Props) {
             <div key={article.slug}>
               <MotionSlide right>
                 {newYear && (
-                  <div className={`text-sm sm:text-xl font-bold mb-3 sm:mb-5`}>
+                  <div className={`text-md sm:text-xl font-bold mb-3 sm:mb-5`}>
                     {thisYear}
                   </div>
                 )}
                 <div className="flex  items-start mr-5 mb-3 sm:mb-4">
-                  <div className="text-xs sm:text-sm text-gray-950 opacity-90 flex-shrink-0 w-14 sm:w-16">
+                  <div className="text-sm sm:text-sm text-gray-950 opacity-90 flex-shrink-0 w-14 sm:w-16">
                     {formatDate(article.date).slice(5)}
                   </div>
-                  <div className="text-link hover:underline text-sm sm:text-base -translate-y-0.5 sm:-translate-y-0.5">
+                  <div className="text-link hover:underline text-md sm:text-base -translate-y-[3.25px] sm:-translate-y-0.5">
                     <Link href={article.slug}>{article.title}</Link>
                   </div>
                 </div>

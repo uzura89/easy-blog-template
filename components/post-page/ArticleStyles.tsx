@@ -59,7 +59,7 @@ export default function ArticleStyles() {
     }
     
     .article p {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 `}</style>

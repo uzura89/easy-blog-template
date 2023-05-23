@@ -9,7 +9,7 @@ function NavItem(props: { href: string; text: string; active: boolean }) {
   return (
     <Link href={props.href} className="mx-2 sm:mx-3">
       <div
-        className={`text-xs sm:text-sm font-bold rounded hover:underline ${
+        className={`text-sm sm:text-sm font-bold rounded hover:underline ${
           props.active ? "text-primary " : "opacity-70"
         }`}
       >
