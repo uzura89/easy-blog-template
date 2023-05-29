@@ -1,6 +1,6 @@
 export default function ArticleStyles() {
   const HeaderBase = `
-    line-height: 1.5;
+    line-height: 1.5em;
     font-weight: bold;
   `;
 
@@ -9,8 +9,8 @@ export default function ArticleStyles() {
   .article  img {
     width: 580px;
     margin: auto;
-    margin-bottom: 1.8rem;
-    margin-top: 1.8rem;
+    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
     border-radius: 0.3rem;
     max-width: 100%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -34,6 +34,7 @@ export default function ArticleStyles() {
     font-size: 17px;
     color: rgb(var(--foreground-rgb-light));
     line-height: 1.75;
+    margin-bottom: 1.5em;
   }
 
   .article a {
@@ -44,6 +45,7 @@ export default function ArticleStyles() {
   @media (max-width:640px) {
     .article img {
       margin-bottom: 1.5rem;
+      margin-top: 1.5rem;
     }
 
     .article h1 {
@@ -59,7 +61,7 @@ export default function ArticleStyles() {
     }
     
     .article p {
-      font-size: 16px;
+      font-size: 15px;
     }
   }
 `}</style>

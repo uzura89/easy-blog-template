@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 import { formatDate } from "@/modules/DateHandler";
@@ -62,10 +61,10 @@ export default function Home(props: Props) {
                   </div>
                 )}
                 <div className="flex  items-start mr-5 mb-3 sm:mb-4">
-                  <div className="text-sm sm:text-sm text-gray-950 opacity-90 flex-shrink-0 w-14 sm:w-16">
+                  <div className="text-sm sm:text-sm text-gray-950 opacity-90 flex-shrink-0 w-16">
                     {formatDate(article.date).slice(5)}
                   </div>
-                  <div className="text-link hover:underline text-md sm:text-base -translate-y-[3.25px] sm:-translate-y-0.5">
+                  <div className="text-link hover:underline text-base -translate-y-[3.25px] sm:-translate-y-0.5">
                     <Link href={article.slug}>{article.title}</Link>
                   </div>
                 </div>

@@ -34,7 +34,7 @@ export default function Page(props: Props) {
             <div className="text-sm font-bold text-third mb-3 sm:mb-5">
               {formatDate(props.article.date)}
             </div>
-            <h1 className="text-2xl sm:text-4xl font-bold mb-7 sm:mb-10 leading-8 sm:leading-10">
+            <h1 className="text-2xl sm:text-4xl font-bold mb-7 sm:mb-10 leading-8 sm:leading-tight">
               {props.article.title}
             </h1>
             <div
