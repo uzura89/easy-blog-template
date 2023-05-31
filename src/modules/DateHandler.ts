@@ -1,10 +1,14 @@
-export function formatDate(dateString: string) {
+export function formatDate(dateString: string, usFormat?: boolean) {
   const year = dateString.split("-")[0];
   const month = new Date(dateString.split("-")[1] + "/01/2000").toLocaleString(
     "en",
     { month: "long" }
   );
   const day = dateString.split("-")[2];
+
+  if (usFormat) {
+    return `${month} ${day}, ${year}`;
+  }
 
   return `${year} ${month.slice(0, 3)} ${day}`;
 }

@@ -1,9 +1,5 @@
-import Link from "next/link";
-
-import { formatDate } from "@/modules/DateHandler";
 import { callFetchAllArticles } from "@/ajax/ArticleAjax";
-import MotionSlide from "../components/commons/motion/MotionSlide";
-import { ArticleHeader, INITIAL_ARTICLE } from "@/types/Article";
+import { ArticleHeader } from "@/types/Article";
 import { GetStaticProps } from "next";
 import { useState, useEffect, useContext } from "react";
 import PageShell from "../components/page-shell/PageShell";
@@ -12,6 +8,10 @@ import Button from "../components/commons/buttons/Button";
 import { PATH_EDITOR } from "@/constants/path";
 import { useRouter } from "next/router";
 import { AdminContext } from "../components/context/ContextProvider";
+import BlogConfig, { BLOG_THEME_IMAGE, BLOG_THEME_TEXT } from "../blog.config";
+
+import BlogArticlesText from "../components/articles/BlogArticlesText";
+import BlogArticlesImage from "../components/articles/BlogArticlesImage";
 
 interface Props {
   articles: ArticleHeader[];
@@ -22,8 +22,6 @@ export default function Home(props: Props) {
   const { isAdmin } = useContext(AdminContext);
 
   const [articles, setArticles] = useState<ArticleHeader[]>(props.articles);
-
-  let prevYear = "";
 
   const getArticles = async () => {
     const { articles } = await callFetchAllArticles();
@@ -38,40 +36,28 @@ export default function Home(props: Props) {
     getArticles();
   }, [props.articles]);
 
+  /**
+   * Render
+   */
+
+  const renderBlogArticles = (theme: string) => {
+    if (theme === BLOG_THEME_TEXT) {
+      return <BlogArticlesText articles={articles} />;
+    } else {
+      return <BlogArticlesImage articles={articles} />;
+    }
+  };
+
   return (
     <PageShell>
-      <Container>
+      <Container wide={BlogConfig.theme === BLOG_THEME_IMAGE}>
         {isAdmin && (
-          <div className="flex mb-3 justify-end gap-3 -mt-3 text-sm font-bold text-third">
+          <div className="flex mb-8 justify-end gap-3 -mt-3 text-sm font-bold text-third">
             <Button onClick={onClickNewPost}>+ New Post</Button>
           </div>
         )}
 
-        {articles.map((article) => {
-          const thisYear = article.date.split("-")[0];
-          const newYear = prevYear !== thisYear;
-          prevYear = thisYear;
-
-          return (
-            <div key={article.slug}>
-              <MotionSlide right>
-                {newYear && (
-                  <div className={`text-md sm:text-xl font-bold mb-3 sm:mb-5`}>
-                    {thisYear}
-                  </div>
-                )}
-                <div className="flex  items-start mr-5 mb-3 sm:mb-4">
-                  <div className="text-sm sm:text-sm text-gray-950 opacity-90 flex-shrink-0 w-16">
-                    {formatDate(article.date).slice(5)}
-                  </div>
-                  <div className="text-link hover:underline text-base -translate-y-[3.25px] sm:-translate-y-0.5">
-                    <Link href={article.slug}>{article.title}</Link>
-                  </div>
-                </div>
-              </MotionSlide>
-            </div>
-          );
-        })}
+        {renderBlogArticles(BlogConfig.theme)}
       </Container>
     </PageShell>
   );

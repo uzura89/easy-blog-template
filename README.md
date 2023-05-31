@@ -35,10 +35,14 @@ First, configure your blog.
 Open 'blog.config.ts' file and edit the title, subtitle, and url of your blog.
 
 ```javascript
+export const BLOG_THEME_TEXT = "text";
+export const BLOG_THEME_IMAGE = "image";
+
 const BlogConfig = {
   title: "THE BLOG",
   subtitle: "Thoughts and travels",
-  url: "https://theblog.com",
+  url: "https://blog.com",
+  theme: BLOG_THEME_TEXT,
 };
 
 export default BlogConfig;
