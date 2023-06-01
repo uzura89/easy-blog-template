@@ -28,8 +28,12 @@ export default function BlogArticlesTextTags(props: Props): React.ReactElement {
           <div key={articleByTag.tag}>
             <MotionSlide right>
               <div className="flex items-center mb-4">
-                <div className="text-third mr-1 font-bold text-sm">#</div>
-                <h2 className="font-bold text-md">{articleByTag.tag}</h2>
+                <div className="text-third mr-1 font-bold text-sm sm:text-md">
+                  #
+                </div>
+                <h2 className="font-bold text-md sm:text-xl">
+                  {articleByTag.tag}
+                </h2>
               </div>
               {articleByTag.articles.map((article) => {
                 return (
