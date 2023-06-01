@@ -8,8 +8,8 @@ interface Props {
   articles: ArticleHeader[];
 }
 
-export default function Home(props: Props) {
-  return <BlogArticles articles={props.articles} sortedByTags={false} />;
+export default function Tags(props: Props) {
+  return <BlogArticles articles={props.articles} sortedByTags={true} />;
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

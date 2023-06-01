@@ -37,6 +37,7 @@ export default function Header() {
 
       <div className="mt-4 sm:mt-6 mb-4 sm:mb-7 flex flex-row">
         <NavItem href="/" text="Posts" active={pathname === "/"} />
+        <NavItem href="/tags" text="Tags" active={pathname === "/tags"} />
         <NavItem href="/about" text="About" active={pathname === "/about"} />
       </div>
     </div>

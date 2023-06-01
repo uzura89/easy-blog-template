@@ -62,6 +62,7 @@ export default function EditorPage(props: Props) {
       const articleWithoutSpaces = removeStringWithSpaces(value);
 
       const slugNoSpace = slug.replace(/\s+/g, "-").toLowerCase();
+
       const data = await callCreateArticle(
         title,
         articleWithoutSpaces,
@@ -104,7 +105,7 @@ export default function EditorPage(props: Props) {
           className="px-4 py-2 w-full border border-border rounded-sm"
           value={slug}
           onChange={onChangeSlug}
-          placeholder="slug"
+          placeholder="slug-of-post"
         />
       </div>
 
@@ -113,18 +114,18 @@ export default function EditorPage(props: Props) {
           className="px-4 py-2 w-full border border-border rounded-sm"
           value={title}
           onChange={onChangeTitle}
-          placeholder="title"
+          placeholder="Title"
         />
       </div>
 
-      {/* <div className="mb-8">
+      <div className="mb-8">
         <input
-          className="px-4 py-2 w-full"
+          className="px-4 py-2 w-full border border-border rounded-sm"
           value={tags}
           onChange={onChangeTags}
           placeholder="tag, tag, tag"
         />
-      </div> */}
+      </div>
 
       <div className="mb-8">
         <input

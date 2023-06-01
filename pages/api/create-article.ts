@@ -126,7 +126,7 @@ const processArticleAndSaveImages = async (
       title,
       body: modifiedBody,
       date,
-      tags: tags.split(","),
+      tags: tags.split(",").map((tag) => tag.trim()),
       images: imageNames,
     };
 

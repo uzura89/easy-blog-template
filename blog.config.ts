@@ -5,7 +5,7 @@ const BlogConfig = {
   title: "THE BLOG",
   subtitle: "Thoughts and travels",
   url: "https://theblog-theta.vercel.app",
-  theme: BLOG_THEME_IMAGE,
+  theme: BLOG_THEME_TEXT,
 };
 
 export default BlogConfig;

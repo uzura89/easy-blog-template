@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
-import Link from "next/link";
 
-import { formatDate } from "@/modules/DateHandler";
 import { ArticleHeader } from "@/types/Article";
 import MotionSlide from "../commons/motion/MotionSlide";
+import BlogArticleItemText from "./BlogArticleItemText";
 
 interface Props {
   articles: ArticleHeader[];
@@ -27,14 +26,7 @@ export default function BlogArticlesText(props: Props): React.ReactElement {
                   {thisYear}
                 </div>
               )}
-              <div className="flex  items-start mr-5 mb-3 sm:mb-4">
-                <div className="text-sm sm:text-sm text-gray-950 opacity-90 flex-shrink-0 w-16">
-                  {formatDate(article.date).slice(5)}
-                </div>
-                <div className="text-link hover:underline text-base -translate-y-[3.25px] sm:-translate-y-0.5">
-                  <Link href={article.slug}>{article.title}</Link>
-                </div>
-              </div>
+              <BlogArticleItemText article={article} />
             </MotionSlide>
           </div>
         );
