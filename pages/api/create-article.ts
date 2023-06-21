@@ -41,9 +41,9 @@ async function saveBase64Image(
   const directoryPath = path.join(articlePath, "img");
 
   try {
-    const originalFilename = getOriginalFileName(filename, base64Data);
-    if (!originalFilename) throw Error;
-    const filePath = path.join(directoryPath, originalFilename);
+    // const originalFilename = getOriginalFileName(filename, base64Data);
+    // if (!originalFilename) throw Error;
+    const filePath = path.join(directoryPath, filename);
 
     // Create the directory if it doesn't exist
     await fs.promises.mkdir(directoryPath, { recursive: true });
@@ -62,19 +62,22 @@ async function saveBase64Image(
   }
 }
 
-async function saveImages(slug: string, imageDataStrings: string[]) {
+async function saveImages(
+  slug: string,
+  imageDataStrings: string[],
+  imageFilenames: string[]
+) {
   if (imageDataStrings.length === 0) return [];
 
   const imageNames: string[] = [];
   let index = 1;
 
   for (const imageDataString of imageDataStrings) {
-    const filename = index.toString();
+    const filename = imageFilenames[index - 1];
 
     await saveBase64Image(filename, slug, imageDataString);
-    const originalFilename = getOriginalFileName(filename, imageDataString);
-    if (originalFilename) {
-      imageNames.push(originalFilename);
+    if (filename) {
+      imageNames.push(filename);
     }
     index++;
   }
@@ -91,19 +94,24 @@ async function saveImagesAsFile(
 
     const imgElements = doc.querySelectorAll("img");
     const imageDataStrings: string[] = [];
+    const imageFilenames: string[] = [];
 
     imgElements.forEach((imgElement, index) => {
       const src = imgElement.getAttribute("src");
       if (!src) return;
       if (src.startsWith("data:image")) {
-        const filename = getOriginalFileName((index + 1).toString(), src);
+        const filename = getOriginalFileName(
+          `${(index + 1).toString()}-${Date.now()}`,
+          src
+        );
+        imageFilenames.push(filename || "");
         imageDataStrings.push(src);
         imgElement.setAttribute("src", filename || "");
         imgElement.setAttribute("alt", filename || "");
       }
     });
 
-    const imageNames = await saveImages(slug, imageDataStrings);
+    const imageNames = await saveImages(slug, imageDataStrings, imageFilenames);
 
     const modifiedHTMLString = doc.documentElement.innerHTML;
     return { modifiedBody: modifiedHTMLString, imageNames };
@@ -111,7 +119,6 @@ async function saveImagesAsFile(
     throw Error;
   }
 }
-
 const processArticleAndSaveImages = async (
   status: string,
   title: string,
