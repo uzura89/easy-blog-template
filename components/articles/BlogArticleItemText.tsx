@@ -1,3 +1,4 @@
+import { ARTICLE_STATUS_DRAFT } from "@/constants";
 import { formatDate } from "@/modules/DateHandler";
 import { ArticleHeader } from "@/types/Article";
 import Link from "next/link";
@@ -26,8 +27,15 @@ export default function BlogArticleItemText(props: {
     <div className="flex  items-start mr-5 mb-3 sm:mb-4">
       <YearSection withYear={props.withYear} article={props.article} />
 
-      <div className="text-link hover:underline text-base -translate-y-[3.25px] sm:-translate-y-0.5">
-        <Link href={props.article.slug}>{props.article.title}</Link>
+      <div
+        className={`text-link hover:underline text-base -translate-y-[3.25px] sm:-translate-y-0.5 ${
+          props.article.status === ARTICLE_STATUS_DRAFT && "!text-gray-500"
+        }`}
+      >
+        <Link href={props.article.slug}>
+          {props.article.title}
+          {props.article.status === ARTICLE_STATUS_DRAFT && " (Draft)"}
+        </Link>
       </div>
     </div>
   );

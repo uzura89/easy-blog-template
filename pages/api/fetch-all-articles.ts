@@ -3,6 +3,8 @@ import { promisify } from "util";
 import fs from "fs";
 import { ArticleHeader } from "@/types/Article";
 import { getArticlesPath } from "./modules/path";
+import { isProduction } from "./modules/envChecker";
+import { ARTICLE_STATUS_DRAFT } from "@/constants";
 
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
@@ -11,7 +13,7 @@ const readFile = promisify(fs.readFile);
  * Modules
  */
 
-const getArticlesFromJson = async () => {
+const getArticlesFromJson = async (props: { includeDraft?: boolean }) => {
   try {
     const articlesPath = getArticlesPath();
 
@@ -32,7 +34,13 @@ const getArticlesFromJson = async () => {
 
       const jsonData = JSON.parse(data);
 
+      // don't include draft article if it's production
+      if (!props.includeDraft && jsonData.status === ARTICLE_STATUS_DRAFT) {
+        return;
+      }
+
       articles.push({
+        status: jsonData.status,
         slug: articleFolderName,
         title: jsonData.title,
         date: jsonData.date,
@@ -53,7 +61,13 @@ const getArticlesFromJson = async () => {
 
 export default async function handler(req: any, res: any) {
   try {
-    const articles = await getArticlesFromJson();
+    const { includeDraft } = req.query;
+
+    if (includeDraft && isProduction()) throw Error;
+
+    const articles = await getArticlesFromJson({ includeDraft });
+
+    if (!articles) return res.status(200).json({ articles: [] });
 
     // sort articles by date
     articles.sort((a, b) => {

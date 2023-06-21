@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { QuillEditor } from "../../components/editor/QuillEditor";
 import Container from "../../components/commons/layouts/Container";
 import { replaceImagePathsToBase64 } from "@/modules/ImageHandler";
+import { ARTICLE_STATUS_DRAFT, ARTICLE_STATUS_PUBLISHED } from "@/constants";
 
 interface Props {
   slug: string | null;
@@ -17,11 +18,16 @@ interface Props {
 export default function EditorPage(props: Props) {
   const router = useRouter();
 
+  const [status, setStatus] = useState(ARTICLE_STATUS_DRAFT); // [draft, published
   const [slug, setSlug] = useState("");
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
   const [tags, setTags] = useState("");
   const [date, setDate] = useState(convertDateToSlug(new Date()));
+
+  const onChangeStatus = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setStatus(event.target.value);
+  };
 
   const onChangeSlug = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSlug(event.target.value);
@@ -64,6 +70,7 @@ export default function EditorPage(props: Props) {
       const slugNoSpace = slug.replace(/\s+/g, "-").toLowerCase();
 
       const data = await callCreateArticle(
+        status,
         title,
         articleWithoutSpaces,
         date,
@@ -84,6 +91,7 @@ export default function EditorPage(props: Props) {
       // process article
       const articleWithBase64 = await replaceImagePathsToBase64(article.body);
 
+      setStatus(article.status);
       setSlug(article.slug || "");
       setTitle(article.title);
       setValue(articleWithBase64);
@@ -100,6 +108,17 @@ export default function EditorPage(props: Props) {
 
   return (
     <Container>
+      <div className="mb-8">
+        <select
+          className="px-4 py-2 w-28 border border-border rounded-sm"
+          value={status}
+          onChange={onChangeStatus}
+        >
+          <option value={ARTICLE_STATUS_DRAFT}>Draft</option>
+          <option value={ARTICLE_STATUS_PUBLISHED}>Published</option>
+        </select>
+      </div>
+
       <div className="mb-8">
         <input
           className="px-4 py-2 w-full border border-border rounded-sm"

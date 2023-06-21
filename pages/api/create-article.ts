@@ -113,6 +113,7 @@ async function saveImagesAsFile(
 }
 
 const processArticleAndSaveImages = async (
+  status: string,
   title: string,
   date: string,
   body: string,
@@ -123,6 +124,7 @@ const processArticleAndSaveImages = async (
     const { imageNames, modifiedBody } = await saveImagesAsFile(slug, body);
 
     const articleData: Article = {
+      status,
       title,
       body: modifiedBody,
       date,
@@ -164,11 +166,12 @@ export default async function handler(req: any, res: any) {
   if (isProduction()) throw Error;
 
   try {
-    const { title, date, body, tags, slug } = req.body;
+    const { status, title, date, body, tags, slug } = req.body;
 
     await deleteArticleDirectory(slug);
 
     const article = await processArticleAndSaveImages(
+      status,
       title,
       date,
       body,

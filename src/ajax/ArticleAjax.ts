@@ -1,8 +1,10 @@
 import { APP_URL } from "@/constants";
 import { Article, ArticleHeader, INITIAL_ARTICLE } from "@/types/Article";
 import axios from "axios";
+import { isProduction } from "../../pages/api/modules/envChecker";
 
 export async function callCreateArticle(
+  status: string,
   title: string,
   body: string,
   date: string,
@@ -14,6 +16,7 @@ export async function callCreateArticle(
       method: "post",
       url: `${APP_URL}/api/create-article`,
       data: {
+        status,
         title,
         body,
         date,
@@ -32,7 +35,11 @@ export async function callFetchAllArticles(): Promise<{
   articles: ArticleHeader[];
 }> {
   try {
-    const response = await axios.get(`${APP_URL}/api/fetch-all-articles`);
+    const response = await axios.get(`${APP_URL}/api/fetch-all-articles`, {
+      params: {
+        includeDraft: !isProduction(),
+      },
+    });
 
     const articles = response.data.articles;
     return { articles };
@@ -46,7 +53,12 @@ export async function callFetchArticle(
 ): Promise<{ article: Article }> {
   try {
     const response = await axios.get(
-      `${APP_URL}/api/fetch-article?slug=${slug}`
+      `${APP_URL}/api/fetch-article?slug=${slug}`,
+      {
+        params: {
+          includeDraft: !isProduction(),
+        },
+      }
     );
     const article = response.data.article;
     return { article };

@@ -4,6 +4,8 @@ import fs from "fs";
 
 import { Article } from "@/types/Article";
 import { getJsonPath } from "./modules/path";
+import { isProduction } from "./modules/envChecker";
+import { ARTICLE_STATUS_DRAFT } from "@/constants";
 
 const readFile = promisify(fs.readFile);
 
@@ -48,10 +50,16 @@ const embedImageUrls = (
  */
 
 export default async function handler(req: any, res: any) {
-  const { slug } = req.query;
+  const { slug, includeDraft } = req.query;
 
   try {
+    if (isProduction() && includeDraft) throw Error;
+
     const articleJson = await getArticleJson(slug);
+
+    if (!includeDraft && articleJson.status === ARTICLE_STATUS_DRAFT) {
+      throw Error;
+    }
 
     const bodyWithImages = embedImageUrls(
       articleJson.body,
@@ -60,6 +68,7 @@ export default async function handler(req: any, res: any) {
     );
 
     const article: Article = {
+      status: articleJson.status,
       slug: slug,
       title: articleJson.title,
       date: articleJson.date,
