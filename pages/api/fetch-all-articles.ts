@@ -13,7 +13,7 @@ const readFile = promisify(fs.readFile);
  * Modules
  */
 
-const getArticlesFromJson = async (props: { includeDraft?: boolean }) => {
+const getArticlesFromJson = async () => {
   try {
     const articlesPath = getArticlesPath();
 
@@ -35,7 +35,7 @@ const getArticlesFromJson = async (props: { includeDraft?: boolean }) => {
       const jsonData = JSON.parse(data);
 
       // don't include draft article if it's production
-      if (!props.includeDraft && jsonData.status === ARTICLE_STATUS_DRAFT) {
+      if (isProduction() && jsonData.status === ARTICLE_STATUS_DRAFT) {
         return;
       }
 
@@ -61,11 +61,7 @@ const getArticlesFromJson = async (props: { includeDraft?: boolean }) => {
 
 export default async function handler(req: any, res: any) {
   try {
-    const { includeDraft } = req.query;
-
-    if (includeDraft && isProduction()) throw Error;
-
-    const articles = await getArticlesFromJson({ includeDraft });
+    const articles = await getArticlesFromJson();
 
     if (!articles) return res.status(200).json({ articles: [] });
 

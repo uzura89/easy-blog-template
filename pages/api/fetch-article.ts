@@ -50,22 +50,20 @@ const embedImageUrls = (
  */
 
 export default async function handler(req: any, res: any) {
-  const { slug, includeDraft } = req.query;
+  const { slug } = req.query;
 
   try {
-    if (isProduction() && includeDraft) throw Error;
-
     const articleJson = await getArticleJson(slug);
-
-    if (!includeDraft && articleJson.status === ARTICLE_STATUS_DRAFT) {
-      throw Error;
-    }
 
     const bodyWithImages = embedImageUrls(
       articleJson.body,
       articleJson.images,
       slug
     );
+
+    if (isProduction() && articleJson.status === ARTICLE_STATUS_DRAFT) {
+      throw Error;
+    }
 
     const article: Article = {
       status: articleJson.status,
