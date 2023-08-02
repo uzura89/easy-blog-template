@@ -34,7 +34,7 @@ export async function callFetchAllArticles(): Promise<{
   articles: ArticleHeader[];
 }> {
   try {
-    const response = await axios.get(`${APP_URL}/api/fetch-all-articles}`);
+    const response = await axios.get(`${APP_URL}/api/fetch-all-articles`);
 
     const articles = response.data.articles;
     return { articles };

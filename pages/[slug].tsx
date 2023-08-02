@@ -13,6 +13,7 @@ import MotionSlide from "../components/commons/motion/MotionSlide";
 import { AdminContext } from "../components/context/ContextProvider";
 import PageShell from "../components/page-shell/PageShell";
 import Container from "../components/commons/layouts/Container";
+import HeadSetter from "../components/commons/head/HeadSetter";
 
 interface Props {
   article: Article;
@@ -25,6 +26,16 @@ export default function Page(props: Props) {
 
   return (
     <PageShell>
+      <HeadSetter
+        pageTitle={props.article.title}
+        pageDescription={props.article.title}
+        pagePath={`/${props.article.slug}`}
+        pageImg={
+          props.article.images
+            ? `/articles/${props.article.slug}/img/${props.article.images[0]}`
+            : ""
+        }
+      />
       <Container>
         <ArticleStyles />
         <div key={props.article.slug}>

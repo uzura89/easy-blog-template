@@ -72,6 +72,7 @@ export default async function handler(req: any, res: any) {
       date: articleJson.date,
       body: bodyWithImages,
       tags: articleJson.tags,
+      images: articleJson.images,
     };
 
     return res.status(200).json({ article });
