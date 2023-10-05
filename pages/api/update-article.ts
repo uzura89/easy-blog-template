@@ -1,13 +1,7 @@
-import jsdom from "jsdom";
-import fs from "fs";
-import path from "path";
-
-import { Article } from "@/types/Article";
 import { deleteArticleDirectory } from "./delete-article";
-import { getArticlePath } from "./modules/path";
+
 import { isProduction } from "./modules/envChecker";
 import {
-  makeUniqueSlug,
   processArticleAndSaveImages,
   saveArticleJson,
 } from "./modules/article.handler";
@@ -30,7 +24,7 @@ export default async function handler(req: any, res: any) {
   try {
     const { status, title, date, body, tags, slug } = req.body;
 
-    const uniqueSlug = await makeUniqueSlug(slug);
+    await deleteArticleDirectory(slug);
 
     const article = await processArticleAndSaveImages(
       status,
@@ -38,12 +32,12 @@ export default async function handler(req: any, res: any) {
       date,
       body,
       tags,
-      uniqueSlug
+      slug
     );
 
-    await saveArticleJson(uniqueSlug, article);
+    await saveArticleJson(slug, article);
 
-    return res.status(200).json({ slug: uniqueSlug });
+    return res.status(200).json({ slug });
   } catch (err) {
     return res.status(500).json({ message: "Something went wrong" });
   }

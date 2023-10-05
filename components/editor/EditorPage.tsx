@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 import { convertDateToSlug } from "@/modules/DateHandler";
 
-import { callCreateArticle, callFetchArticle } from "@/ajax/ArticleAjax";
+import {
+  callCreateArticle,
+  callFetchArticle,
+  callUpdateArticle,
+} from "@/ajax/ArticleAjax";
 import { useRouter } from "next/navigation";
 
 import { QuillEditor } from "../../components/editor/QuillEditor";
@@ -24,6 +28,7 @@ export default function EditorPage(props: Props) {
   const [value, setValue] = useState("");
   const [tags, setTags] = useState("");
   const [date, setDate] = useState(convertDateToSlug(new Date()));
+  const [isNew, setIsNew] = useState(false); // [true, false
 
   const onChangeStatus = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setStatus(event.target.value);
@@ -69,15 +74,27 @@ export default function EditorPage(props: Props) {
 
       const slugNoSpace = slug.replace(/\s+/g, "-").toLowerCase();
 
-      const data = await callCreateArticle(
-        status,
-        title,
-        articleWithoutSpaces,
-        date,
-        tags,
-        slugNoSpace
-      );
-      router.push(`/${data.slug}`);
+      if (isNew) {
+        const data = await callCreateArticle(
+          status,
+          title,
+          articleWithoutSpaces,
+          date,
+          tags,
+          slugNoSpace
+        );
+        router.push(`/${data.slug}`);
+      } else {
+        const data = await callUpdateArticle(
+          status,
+          title,
+          articleWithoutSpaces,
+          date,
+          tags,
+          slugNoSpace
+        );
+        router.push(`/${data.slug}`);
+      }
     } catch (err) {
       window.alert("Failed to save article.");
     }
@@ -103,6 +120,8 @@ export default function EditorPage(props: Props) {
   useEffect(() => {
     if (props.slug) {
       setPostData(props.slug);
+    } else {
+      setIsNew(true);
     }
   }, [props.slug]);
 

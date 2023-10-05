@@ -30,6 +30,34 @@ export async function callCreateArticle(
   }
 }
 
+export async function callUpdateArticle(
+  status: string,
+  title: string,
+  body: string,
+  date: string,
+  tags: string,
+  slug: string
+): Promise<{ slug: string }> {
+  try {
+    const response = await axios({
+      method: "post",
+      url: `${APP_URL}/api/update-article`,
+      data: {
+        status,
+        title,
+        body,
+        date,
+        tags,
+        slug,
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    return { slug: "" };
+  }
+}
+
 export async function callFetchAllArticles(): Promise<{
   articles: ArticleHeader[];
 }> {
