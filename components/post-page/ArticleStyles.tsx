@@ -47,11 +47,6 @@ export default function ArticleStyles() {
   }
 
   @media (max-width:640px) {
-    .article img {
-      margin-bottom: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
     .article h1 {
       font-size: 1.4rem;
       margin-bottom: 0.8em;
@@ -62,6 +57,10 @@ export default function ArticleStyles() {
       font-size: 1.1rem;
       margin-top: 1em;
       margin-bottom: 0.8em;
+    }
+  
+    .article img {
+      max-height: 395px;
     }
   }
 `}</style>
