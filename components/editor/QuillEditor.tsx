@@ -21,6 +21,8 @@ const quillModules = {
       { indent: "-1" },
       { indent: "+1" },
     ],
+    [{ size: ["small", false, "large", "huge"] }], // Add size dropdown
+    [{ align: [] }],
     ["link", "image"],
     ["clean"],
   ],

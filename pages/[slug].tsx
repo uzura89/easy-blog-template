@@ -14,6 +14,8 @@ import { AdminContext } from "../components/context/ContextProvider";
 import PageShell from "../components/page-shell/PageShell";
 import Container from "../components/commons/layouts/Container";
 import HeadSetter from "../components/commons/head/HeadSetter";
+import BlogConfig from "../blog.config";
+import { stripHtmlTags } from "@/modules/HtmlHandler";
 
 interface Props {
   article: Article;
@@ -28,11 +30,11 @@ export default function Page(props: Props) {
     <PageShell>
       <HeadSetter
         pageTitle={props.article.title}
-        pageDescription={props.article.title}
+        pageDescription={stripHtmlTags(props.article.body).slice(0, 97) + "..."}
         pagePath={`/${props.article.slug}`}
         pageImg={
           props.article.images
-            ? `/articles/${props.article.slug}/img/${props.article.images[0]}`
+            ? `${BlogConfig.url}/articles/${props.article.slug}/img/${props.article.images[0]}`
             : ""
         }
       />
