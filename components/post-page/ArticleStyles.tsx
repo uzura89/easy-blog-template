@@ -15,14 +15,12 @@ export default function ArticleStyles() {
   }
 
   .article h1 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
+    font-size: 1.8rem;
     ${HeaderBase}
   }
 
   .article h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+    font-size: 1.45rem;
     ${HeaderBase}
   }
 
@@ -30,6 +28,10 @@ export default function ArticleStyles() {
     font-size: 17px;
     color: rgb(var(--foreground-rgb-light));
     line-height: 1.75;
+  }
+
+  .article li {
+    margin-bottom: 0.5em;
   }
 
   .article a {

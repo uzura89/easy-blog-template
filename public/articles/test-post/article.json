@@ -1,0 +1,10 @@
+{
+  "status": "draft",
+  "title": "Test Post",
+  "body": "<head></head><body># This is header\nThis is the content. \n\n## This is H2\n![header image]()</body>",
+  "date": "2024-03-17",
+  "tags": [
+    "test"
+  ],
+  "images": []
+}
