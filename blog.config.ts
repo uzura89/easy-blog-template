@@ -6,6 +6,7 @@ const BlogConfig = {
   subtitle: "Thoughts and travels",
   url: "https://blog.com",
   theme: BLOG_THEME_TEXT,
+  description: "A blog about thoughts and travels.",
 };
 
 export default BlogConfig;

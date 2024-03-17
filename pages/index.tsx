@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 
 import BlogArticles from "../components/articles/BlogArticles";
 import { Fragment } from "react";
-import { BLOG_NAME, BLOG_SUBTITLE } from "@/constants";
+import { BLOG_DESCRIPTION, BLOG_NAME } from "@/constants";
 import HeadSetter from "../components/commons/head/HeadSetter";
 
 interface Props {
@@ -16,7 +16,7 @@ export default function Home(props: Props) {
     <Fragment>
       <HeadSetter
         pageTitle={BLOG_NAME}
-        pageDescription={BLOG_SUBTITLE}
+        pageDescription={BLOG_DESCRIPTION}
         pagePath="/"
       />
       <BlogArticles articles={props.articles} sortedByTags={false} />
