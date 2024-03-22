@@ -51,14 +51,10 @@ export default function ArticleStyles() {
   @media (max-width:640px) {
     .article h1 {
       font-size: 1.4rem;
-      margin-bottom: 0.8em;
-      margin-top: 1em;
     }
 
     .article h2 {
       font-size: 1.1rem;
-      margin-top: 1em;
-      margin-bottom: 0.8em;
     }
   
     .article img {
